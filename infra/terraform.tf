@@ -3,7 +3,7 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "terrafrom-resorce-group-www"
-    storage_account_name = "ruutmewebsitetf"
+    storage_account_name = "cs2server"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
     use_oidc             = true
