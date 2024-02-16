@@ -20,7 +20,7 @@ resource "azurerm_storage_share" "game" {
 }
 
 resource "azurerm_container_group" "cs2" {
-  name                = "${var.container_group_name_prefix}-${random_string.container_name.result}"
+  name                = "${var.container_group_name_prefix}${random_string.container_name.result}"
   location            = var.location
   resource_group_name = var.rg_name
   ip_address_type     = "Public"
