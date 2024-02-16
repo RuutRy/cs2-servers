@@ -5,12 +5,27 @@ resource "random_string" "container_name" {
   special = false
 }
 
-resource "azurerm_container_group" "example" {
+resource "azurerm_container_group" "cs2" {
   name                = "${var.container_group_name_prefix}-${random_string.container_name.result}"
   location            = var.location
   resource_group_name = var.rg_name
   ip_address_type     = "Public"
   os_type             = "Linux"
+
+  exposed_port {
+    port     = 27015
+    protocol = "TCP"
+  }
+
+  exposed_port {
+    port     = 27015
+    protocol = "UDP"
+  }
+
+  exposed_port {
+    port     = 27020
+    protocol = "UDP"
+  }
 
   container {
     name   = "cs2"
@@ -31,6 +46,11 @@ resource "azurerm_container_group" "example" {
     ports {
       port     = 27020
       protocol = "UDP"
+    }
+
+    volume {
+      name       = "cs_files"
+      mount_path = "/root/cs2-dedicated"
     }
   }
 
