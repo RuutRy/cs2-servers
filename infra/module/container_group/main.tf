@@ -6,7 +6,7 @@ resource "random_string" "container_name" {
 }
 
 resource "azurerm_storage_account" "game" {
-  name                     = "cs2-${random_string.container_name.result}"
+  name                     = "cs2serverfiles"
   resource_group_name      = var.rg_name
   location                 = var.location
   account_tier             = "Standard"
