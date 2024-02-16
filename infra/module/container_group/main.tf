@@ -5,6 +5,20 @@ resource "random_string" "container_name" {
   special = false
 }
 
+resource "azurerm_storage_account" "game" {
+  name                     = "cs2-${random_string.container_name.result}"
+  resource_group_name      = var.rg_name
+  location                 = var.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+resource "azurerm_storage_share" "game" {
+  name                 = "cs2-game-share"
+  storage_account_name = azurerm_storage_account.game.name
+  quota                = 50
+}
+
 resource "azurerm_container_group" "cs2" {
   name                = "${var.container_group_name_prefix}-${random_string.container_name.result}"
   location            = var.location
@@ -51,6 +65,12 @@ resource "azurerm_container_group" "cs2" {
     volume {
       name       = "cs_files"
       mount_path = "/root/cs2-dedicated"
+      read_only  = false
+      share_name = azurerm_storage_share.game.name
+
+      storage_account_name = azurerm_storage_account.game.name
+      storage_account_key  = azurerm_storage_account.game.primary_access_key
+
     }
   }
 
