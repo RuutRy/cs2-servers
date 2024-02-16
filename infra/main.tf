@@ -17,9 +17,11 @@ resource "azurerm_resource_group" "rg" {
 # Deploy Container Registry
 # ------------------------------------------------------------------------------------------------------
 
-module "container_registry" {
-  source = "./module/container_registry"
+module "container_group" {
+  source = "./module/container_group"
 
-  location = azurerm_resource_group.rg.location
-  rg_name  = azurerm_resource_group.rg.name
+  location                    = azurerm_resource_group.rg.location
+  rg_name                     = azurerm_resource_group.rg.name
+  tags                        = local.tags
+  container_group_name_prefix = "csservers"
 }
