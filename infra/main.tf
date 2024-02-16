@@ -12,3 +12,14 @@ resource "azurerm_resource_group" "rg" {
 
   tags = local.tags
 }
+
+# ------------------------------------------------------------------------------------------------------
+# Deploy Container Registry
+# ------------------------------------------------------------------------------------------------------
+
+module "container_registry" {
+  source = "./module/container_registry"
+
+  location = azurerm_resource_group.rg.location
+  rg_name  = azurerm_resource_group.rg.name
+}
