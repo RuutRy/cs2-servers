@@ -63,7 +63,7 @@ resource "azurerm_container_group" "cs2" {
     }
 
     volume {
-      name       = "cs_files"
+      name       = "csfiles"
       mount_path = "/root/cs2-dedicated"
       read_only  = false
       share_name = azurerm_storage_share.game.name
