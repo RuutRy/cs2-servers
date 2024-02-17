@@ -29,7 +29,7 @@ resource "azurerm_container_group" "cs2" {
   container {
     name   = "cs2"
     image  = "juksuu/cs2:matchup"
-    cpu    = "6"
+    cpu    = "4"
     memory = "10"
 
     ports {
