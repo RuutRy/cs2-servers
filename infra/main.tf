@@ -16,7 +16,7 @@ resource "azurerm_resource_group" "rg" {
 # ------------------------------------------------------------------------------------------------------
 # Deploy Container Registry
 # ------------------------------------------------------------------------------------------------------
-
+/*
 module "container_group" {
   source = "./module/container_group"
 
@@ -25,3 +25,4 @@ module "container_group" {
   tags                        = local.tags
   container_group_name_prefix = "csservers"
 }
+*/
