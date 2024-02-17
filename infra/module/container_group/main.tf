@@ -34,11 +34,6 @@ resource "azurerm_container_group" "cs2" {
 
     ports {
       port     = 27015
-      protocol = "TCP"
-    }
-
-    ports {
-      port     = 27015
       protocol = "UDP"
     }
 
