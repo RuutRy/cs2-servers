@@ -26,21 +26,6 @@ resource "azurerm_container_group" "cs2" {
   ip_address_type     = "Public"
   os_type             = "Linux"
 
-  exposed_port {
-    port     = 27015
-    protocol = "TCP"
-  }
-
-  exposed_port {
-    port     = 27015
-    protocol = "UDP"
-  }
-
-  exposed_port {
-    port     = 27020
-    protocol = "UDP"
-  }
-
   container {
     name   = "cs2"
     image  = "juksuu/cs2:matchup"
