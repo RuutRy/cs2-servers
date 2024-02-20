@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  server1:
+    image: juksuu/cs2:matchup
+    ports:
+      - "27015:27015/udp"
+      - "27015:27015/tcp"
+      - "27020:27020/udp"
+    env_file:
+      - .env
+    environment:
+      BACKUP_FILE_PREFIX: "server1_backup"
+    volumes:
+      - "./cs2-data:/root/cs2-dedicated"

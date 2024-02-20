@@ -16,6 +16,12 @@ terraform {
   }
 }
 
+locals {
+  data_inputs = {
+    name = var.server_name
+  }
+}
+
 resource "azurerm_public_ip" "game" {
   name                = "acceptanceTestPublicIp1"
   resource_group_name = var.rg_name
@@ -46,6 +52,7 @@ resource "azurerm_linux_virtual_machine" "game" {
   location            = var.location
   size                = var.server_size
   admin_username      = "adminuser"
+  user_data           = base64encode(templatefile("${path.module}/../../config/userdata.tftpl", local.data_inputs))
   network_interface_ids = [
     azurerm_network_interface.game.id,
   ]
