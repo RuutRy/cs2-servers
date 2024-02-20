@@ -32,3 +32,8 @@ variable "cloudflare_zone_id" {
   type        = string
   sensitive   = true
 }
+
+variable "domain" {
+  default     = "ruut.me"
+  description = "Domain for cloudflare"
+}
