@@ -51,3 +51,16 @@ resource "cloudflare_record" "name_servers" {
   depends_on = [azurerm_dns_zone.games_ruut]
 }
 
+# ------------------------------------------------------------------------------------------------------
+# Game servers
+# ------------------------------------------------------------------------------------------------------
+
+module "virtual_machines" {
+  source = "./module/virtual_machine"
+
+  rg_name     = azurerm_resource_group.rg.name
+  location    = azurerm_resource_group.rg.location
+  subnet_id   = azurerm_subnet.cs_subnet.id
+  server_name = "test-cs"
+  server_size = "D4as_v4"
+}

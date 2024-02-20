@@ -5,7 +5,7 @@ resource "azurerm_public_ip" "game" {
   allocation_method   = "Static"
 
   tags = {
-    environment = "Production"
+    hostName = var.server_name
   }
 }
 
