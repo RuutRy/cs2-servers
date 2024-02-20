@@ -44,7 +44,7 @@ resource "cloudflare_record" "name_servers" {
   for_each = azurerm_dns_zone.games_ruut.name_servers
 
   zone_id = var.cloudflare_zone_id
-  name    = "games.ruut.me"
+  name    = "pelit.ruut.me"
   type    = "NS"
   value   = each.value
 
@@ -61,7 +61,7 @@ module "virtual_machines" {
   rg_name     = azurerm_resource_group.rg.name
   location    = azurerm_resource_group.rg.location
   subnet_id   = azurerm_subnet.cs_subnet.id
-  zone_id     = var.cloudflare_zone_id
+  zone_name   = azurerm_dns_zone.games_ruut.name
   server_name = "cs1"
   server_size = "Standard_D4as_v4"
 }
