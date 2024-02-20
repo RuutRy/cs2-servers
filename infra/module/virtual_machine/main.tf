@@ -50,3 +50,12 @@ resource "azurerm_linux_virtual_machine" "game" {
     version   = "latest"
   }
 }
+
+
+resource "cloudflare_record" "game_record" {
+  zone_id = var.zone_id
+  name    = "${var.server_name}.games.ruut.me"
+  type    = "A"
+  value   = azurerm_public_ip.game.ip_address
+
+}
