@@ -47,4 +47,6 @@ resource "cloudflare_record" "name_servers" {
   name    = "games.ruut.me"
   type    = "NS"
   value   = each.value
+
+  depends_on = [azurerm_dns_zone.games_ruut]
 }
