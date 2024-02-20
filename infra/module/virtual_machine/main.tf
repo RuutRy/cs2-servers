@@ -34,7 +34,7 @@ resource "azurerm_public_ip" "game" {
 }
 
 resource "azurerm_network_interface" "game" {
-  name                = "game-nic"
+  name                = "${var.server_name}-game-nic"
   location            = var.location
   resource_group_name = var.rg_name
 
