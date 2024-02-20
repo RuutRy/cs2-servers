@@ -1,6 +1,10 @@
 
 locals {
   tags = { azd-env-name : var.environment_name, managed-by : "terraform", project : "cs2-servers" }
+  servers = {
+    cs1 = { size = "Standard_D4as_v4" },
+    cs2 = { size = "Standard_D4as_v4" }
+  }
 }
 # ------------------------------------------------------------------------------------------------------
 # Deploy resource Group
@@ -56,12 +60,13 @@ resource "cloudflare_record" "name_servers" {
 # ------------------------------------------------------------------------------------------------------
 
 module "virtual_machines" {
-  source = "./module/virtual_machine"
+  source   = "./module/virtual_machine"
+  for_each = local.servers
 
   rg_name     = azurerm_resource_group.rg.name
   location    = azurerm_resource_group.rg.location
   subnet_id   = azurerm_subnet.cs_subnet.id
   zone_name   = azurerm_dns_zone.games_ruut.name
-  server_name = "cs1"
-  server_size = "Standard_D4as_v4"
+  server_name = each.key
+  server_size = each.value.size
 }
