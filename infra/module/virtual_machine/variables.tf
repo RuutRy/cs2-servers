@@ -19,6 +19,6 @@ variable "server_size" {
 
 }
 
-variable "zone_id" {
+variable "zone_name" {
 
 }
