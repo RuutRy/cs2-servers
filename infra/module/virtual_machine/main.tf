@@ -31,6 +31,10 @@ resource "azurerm_public_ip" "game" {
   tags = {
     hostName = var.server_name
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "azurerm_network_interface" "game" {
