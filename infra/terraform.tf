@@ -18,6 +18,10 @@ terraform {
       source  = "aztfmod/azurecaf"
       version = "~>1.2.26"
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
   }
 }
 
@@ -25,4 +29,8 @@ provider "azurerm" {
   skip_provider_registration = true
   features {}
   use_oidc = true
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
 }

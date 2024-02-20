@@ -14,15 +14,28 @@ resource "azurerm_resource_group" "rg" {
 }
 
 # ------------------------------------------------------------------------------------------------------
-# Deploy Container Registry
+# Virtual networks for game servers
 # ------------------------------------------------------------------------------------------------------
-/*
-module "container_group" {
-  source = "./module/container_group"
 
-  location                    = azurerm_resource_group.rg.location
-  rg_name                     = azurerm_resource_group.rg.name
-  tags                        = local.tags
-  container_group_name_prefix = "csservers"
+resource "azurerm_virtual_network" "cs_network" {
+  name                = "cs-network"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
 }
-*/
+
+resource "azurerm_subnet" "cs_subnet" {
+  name                 = "internal"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.cs_network.name
+  address_prefixes     = ["10.0.2.0/24"]
+}
+
+# ------------------------------------------------------------------------------------------------------
+# DNS
+# ------------------------------------------------------------------------------------------------------
+
+resource "azurerm_dns_zone" "games_ruut" {
+  name                = "pelit.ruut.me"
+  resource_group_name = azurerm_resource_group.rg.name
+}
