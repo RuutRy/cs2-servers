@@ -1,3 +1,21 @@
+terraform {
+  required_version = "~> 1.4"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.75"
+    }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "~>1.2.26"
+    }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
+  }
+}
+
 resource "azurerm_public_ip" "game" {
   name                = "acceptanceTestPublicIp1"
   resource_group_name = var.rg_name
@@ -34,7 +52,7 @@ resource "azurerm_linux_virtual_machine" "game" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("${path.module}/../../config/id_ed25519.pub")
+    public_key = file("${path.module}/../../config/id_rsa.pub")
   }
 
   os_disk {
