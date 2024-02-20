@@ -10,3 +10,7 @@ output "fqdn" {
   value = module.container_group.fqdn
 }
 */
+
+output "ns" {
+  value = azurerm_dns_zone.games_ruut.name_servers
+}
