@@ -1,5 +1,5 @@
 terraform {
-  required_version = "1.4.7"
+  required_version = "~> 1.4"
 
   backend "azurerm" {
     resource_group_name  = "terrafrom-resorce-group-www"
