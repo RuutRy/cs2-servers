@@ -23,7 +23,7 @@ locals {
 }
 
 resource "azurerm_public_ip" "game" {
-  name                = "acceptanceTestPublicIp1"
+  name                = "${var.server_name}PublicIp1"
   resource_group_name = var.rg_name
   location            = var.location
   allocation_method   = "Static"
