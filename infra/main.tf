@@ -62,6 +62,6 @@ module "virtual_machines" {
   location    = azurerm_resource_group.rg.location
   subnet_id   = azurerm_subnet.cs_subnet.id
   zone_id     = var.cloudflare_zone_id
-  server_name = "test-cs"
+  server_name = "cs1"
   server_size = "D4as_v4"
 }

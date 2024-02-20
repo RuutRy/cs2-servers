@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine" "game" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("${module.path}/../../config/id_ed25519.pub")
+    public_key = file("${path.module}/../../config/id_ed25519.pub")
   }
 
   os_disk {
