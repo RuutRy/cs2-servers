@@ -12,9 +12,23 @@ variable "principal_id" {
   description = "The Id of the azd service principal to add to deployed keyvault access policies"
   type        = string
   default     = ""
+  sensitive   = true
 }
 
 variable "subscription_id" {
   description = "The current subscription id for the terraform instance"
   type        = string
+  sensitive   = true
+}
+
+variable "cloudflare_api_token" {
+  description = "cloudflare API for controlling ruut.me domain"
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudflare_zone_id" {
+  description = "Cloudflare zone where ruut.me resides"
+  type        = string
+  sensitive   = true
 }
