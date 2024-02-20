@@ -56,7 +56,7 @@ jobs:
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform -chdir=infra init -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -backend-config="cloudflare_api_token=${{ secrets.CLOUDFLARE_API }}"
+        run: terraform -chdir=infra init -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
       # Checks that all Terraform configuration files adhere to a canonical format
       # Will fail the build if not
@@ -95,6 +95,7 @@ jobs:
         env:
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAT_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
         run: |
           TERRAFORM_PLAN=$(terraform -chdir=infra show -no-color tfplan)
 
@@ -161,7 +162,7 @@ jobs:
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform -chdir=infra init -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -backend-config="cloudflare_api_token=${{ secrets.CLOUDFLARE_API }}"
+        run: terraform -chdir=infra init -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan
@@ -175,4 +176,5 @@ jobs:
         env:
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAT_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
         run: terraform -chdir=infra apply -auto-approve tfplan
