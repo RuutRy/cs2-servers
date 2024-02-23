@@ -9,6 +9,8 @@ sudo apt install -y docker docker.io docker-compose
 mkdir cs
 cd cs
 echo "HOST_NAME=${name}" > .env
+echo "ENABLE_TV=1" >> .env
+echo "RCON_PASS=${rcon}" >> .env
 wget https://raw.githubusercontent.com/RuutRy/cs2-servers/main/infra/config/docker-compose.yaml
 echo "[INFO] Starting docker-compose"
 sudo docker-compose up -d

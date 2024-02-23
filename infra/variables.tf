@@ -37,3 +37,9 @@ variable "domain" {
   default     = "ruut.me"
   description = "Domain for cloudflare"
 }
+
+variable "rcon_pass" {
+  default     = "changeme"
+  description = "RCON password for cs servers"
+  sensitive   = true
+}

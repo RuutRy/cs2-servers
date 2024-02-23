@@ -71,6 +71,7 @@ jobs:
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
+          TF_VAR_rcon_pass: ${{ secrets.RCON_PASS }}
         run: |
           export exitcode=0
           terraform -chdir=infra plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
@@ -98,6 +99,7 @@ jobs:
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
+          TF_VAR_rcon_pass: ${{ secrets.RCON_PASS }}
         run: |
           TERRAFORM_PLAN=$(terraform -chdir=infra show -no-color tfplan)
 
@@ -168,6 +170,7 @@ jobs:
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
+          TF_VAR_rcon_pass: ${{ secrets.RCON_PASS }}
         run: terraform -chdir=infra init -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
       # Download saved plan from artifacts
@@ -183,4 +186,5 @@ jobs:
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
+          TF_VAR_rcon_pass: ${{ secrets.RCON_PASS }}
         run: terraform -chdir=infra apply -auto-approve tfplan

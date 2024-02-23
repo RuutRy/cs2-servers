@@ -18,7 +18,8 @@ terraform {
 
 locals {
   data_inputs = {
-    name = var.server_name
+    name      = var.server_name
+    rcon_pass = var.rcon_pass
   }
 }
 

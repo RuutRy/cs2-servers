@@ -118,4 +118,5 @@ module "virtual_machines" {
   server_name  = each.key
   server_size  = each.value.size
   sec_group_id = azurerm_network_security_group.sg-cs-connection.id
+  rcon_pass    = var.rcon_pass
 }
