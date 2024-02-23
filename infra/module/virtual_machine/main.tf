@@ -80,6 +80,11 @@ resource "azurerm_linux_virtual_machine" "game" {
   }
 }
 
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id      = azurerm_network_interface.game.id
+  network_security_group_id = var.sec_group_id
+}
+
 
 resource "azurerm_dns_a_record" "game_record" {
   name                = var.server_name

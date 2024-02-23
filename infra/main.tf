@@ -2,7 +2,7 @@
 locals {
   tags = { azd-env-name : var.environment_name, managed-by : "terraform", project : "cs2-servers" }
   servers = {
-    #cs2 = { size = "Standard_D4as_v4" }
+    cs2 = { size = "Standard_D4as_v4" }
   }
 }
 # ------------------------------------------------------------------------------------------------------
@@ -55,6 +55,55 @@ resource "cloudflare_record" "name_servers" {
 }
 
 # ------------------------------------------------------------------------------------------------------
+# Security group rules
+# ------------------------------------------------------------------------------------------------------
+
+resource "azurerm_network_security_group" "sg-cs-connection" {
+  name                = "allow_cs_connections"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "csport"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "27015"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "cs2port"
+    priority                   = 110
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "27020"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "sshport"
+    priority                   = 120
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+
+}
+
+
+# ------------------------------------------------------------------------------------------------------
 # Game servers
 # ------------------------------------------------------------------------------------------------------
 
@@ -62,10 +111,11 @@ module "virtual_machines" {
   source   = "./module/virtual_machine"
   for_each = local.servers
 
-  rg_name     = azurerm_resource_group.rg.name
-  location    = azurerm_resource_group.rg.location
-  subnet_id   = azurerm_subnet.cs_subnet.id
-  zone_name   = azurerm_dns_zone.games_ruut.name
-  server_name = each.key
-  server_size = each.value.size
+  rg_name      = azurerm_resource_group.rg.name
+  location     = azurerm_resource_group.rg.location
+  subnet_id    = azurerm_subnet.cs_subnet.id
+  zone_name    = azurerm_dns_zone.games_ruut.name
+  server_name  = each.key
+  server_size  = each.value.size
+  sec_group_id = azurerm_network_security_group.sg-cs-connection.id
 }
