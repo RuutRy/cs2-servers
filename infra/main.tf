@@ -92,7 +92,7 @@ resource "azurerm_network_security_group" "sg-cs-connection" {
     priority                   = 120
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "tcp"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
     source_address_prefix      = "*"
