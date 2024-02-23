@@ -2,7 +2,7 @@
 locals {
   tags = { azd-env-name : var.environment_name, managed-by : "terraform", project : "cs2-servers" }
   servers = {
-    #cs2 = { size = "Standard_D4as_v4" }
+    cs2 = { size = "Standard_D4as_v4" }
   }
 }
 # ------------------------------------------------------------------------------------------------------
@@ -118,4 +118,5 @@ module "virtual_machines" {
   server_name  = each.key
   server_size  = each.value.size
   sec_group_id = azurerm_network_security_group.sg-cs-connection.id
+  rcon_pass    = var.rcon_pass
 }

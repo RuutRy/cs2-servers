@@ -26,3 +26,7 @@ variable "zone_name" {
 variable "sec_group_id" {
 
 }
+
+variable "rcon_pass" {
+
+}
