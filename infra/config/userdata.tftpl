@@ -10,6 +10,7 @@ mkdir cs
 cd cs
 echo "HOST_NAME=${name}" > .env
 echo "ENABLE_TV=1" >> .env
+echo "MATCHUP_VERSION=v0.3.0" >> .env
 echo "RCON_PASS=${rcon}" >> .env
 wget https://raw.githubusercontent.com/RuutRy/cs2-servers/main/infra/config/docker-compose.yaml
 echo "[INFO] Starting docker-compose"
