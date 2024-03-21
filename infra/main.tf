@@ -2,10 +2,7 @@
 locals {
   tags = { azd-env-name : var.environment_name, managed-by : "terraform", project : "cs2-servers" }
   servers = {
-    lani1 = { size = "Standard_D4as_v4" },
-    lani2 = { size = "Standard_D4as_v4" },
-    lani3 = { size = "Standard_D4as_v4" },
-    lani4 = { size = "Standard_D4as_v4" },
+    #lani1 = { size = "Standard_D4as_v4" }
   }
 }
 # ------------------------------------------------------------------------------------------------------
