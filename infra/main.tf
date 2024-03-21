@@ -42,7 +42,7 @@ resource "azurerm_dns_zone" "games_ruut" {
   name                = "games.ruut.me"
   resource_group_name = azurerm_resource_group.rg.name
 }
-
+/*
 resource "cloudflare_record" "name_servers" {
   for_each = azurerm_dns_zone.games_ruut.name_servers
 
@@ -53,7 +53,7 @@ resource "cloudflare_record" "name_servers" {
 
   depends_on = [azurerm_dns_zone.games_ruut]
 }
-
+*/
 # ------------------------------------------------------------------------------------------------------
 # Security group rules
 # ------------------------------------------------------------------------------------------------------
