@@ -2,10 +2,7 @@
 locals {
   tags = { azd-env-name : var.environment_name, managed-by : "terraform", project : "cs2-servers" }
   servers = {
-    lani1 = { size = "Standard_D4as_v4" },
-    lani2 = { size = "Standard_D4as_v4" },
-    lani3 = { size = "Standard_D4as_v4" },
-    lani4 = { size = "Standard_D4as_v4" },
+    #lani1 = { size = "Standard_D4as_v4" }
   }
 }
 # ------------------------------------------------------------------------------------------------------
@@ -42,7 +39,7 @@ resource "azurerm_subnet" "cs_subnet" {
 # ------------------------------------------------------------------------------------------------------
 
 resource "azurerm_dns_zone" "games_ruut" {
-  name                = "pelit.ruut.me"
+  name                = "games.ruut.me"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
@@ -50,7 +47,7 @@ resource "cloudflare_record" "name_servers" {
   for_each = azurerm_dns_zone.games_ruut.name_servers
 
   zone_id = var.cloudflare_zone_id
-  name    = "pelit.ruut.me"
+  name    = "games.ruut.me"
   type    = "NS"
   value   = each.value
 
