@@ -39,7 +39,7 @@ resource "azurerm_subnet" "cs_subnet" {
 # ------------------------------------------------------------------------------------------------------
 
 resource "azurerm_dns_zone" "games_ruut" {
-  name                = "pelit.ruut.me"
+  name                = "games.ruut.me"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
@@ -47,7 +47,7 @@ resource "cloudflare_record" "name_servers" {
   for_each = azurerm_dns_zone.games_ruut.name_servers
 
   zone_id = var.cloudflare_zone_id
-  name    = "pelit.ruut.me"
+  name    = "games.ruut.me"
   type    = "NS"
   value   = each.value
 
