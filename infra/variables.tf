@@ -43,3 +43,4 @@ variable "rcon_pass" {
   description = "RCON password for cs servers"
   sensitive   = true
 }
+
