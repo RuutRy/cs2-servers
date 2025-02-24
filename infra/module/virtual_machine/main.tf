@@ -68,9 +68,9 @@ resource "azurerm_linux_virtual_machine" "game" {
   }
 
   os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-    disk_size_gb         = 50
+    caching              = "None"
+    storage_account_type = "StandardSSD_LRS"
+    disk_size_gb         = 64
   }
 
   source_image_reference {
