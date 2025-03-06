@@ -3,7 +3,6 @@ locals {
   tags = { azd-env-name : var.environment_name, managed-by : "terraform", project : "cs2-servers" }
   servers = {
     cs1 = { size = "Standard_D4ds_v6" },
-    cs2 = { size = "Standard_D4ds_v6" },
   }
 }
 # ------------------------------------------------------------------------------------------------------
