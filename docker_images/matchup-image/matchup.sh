@@ -6,7 +6,7 @@ base_folder=${HOME}/${STEAMAPPDIR}/game/csgo
 addons_folder=$base_folder/addons
 gameinfo=$base_folder/gameinfo.gi
 
-matchup_version=${MATCHUP_VERSION-"v0.5.5"}
+matchup_version=${MATCHUP_VERSION-"v0.6.0"}
 matchup_version_file=$addons_folder/matchup_version_$matchup_version
 matchup_download_url="https://github.com/Juksuu/MatchUp/releases/download/$matchup_version/MatchUp+cssharp+metamod.zip"
 
