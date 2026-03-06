@@ -67,6 +67,11 @@ resource "azurerm_linux_virtual_machine" "game" {
     public_key = file("${path.module}/../../config/id_rsa.pub")
   }
 
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("${path.module}/../../config/id_ed.pub")
+  }
+
   os_disk {
     caching              = "None"
     storage_account_type = "StandardSSD_LRS"
