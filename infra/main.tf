@@ -46,13 +46,16 @@ resource "azurerm_dns_zone" "games_ruut" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-resource "cloudflare_record" "name_servers" {
+resource "cloudflare_dns_record" "name_servers" {
   for_each = azurerm_dns_zone.games_ruut.name_servers
 
   zone_id = var.cloudflare_zone_id
   name    = "games.ruut.me"
   type    = "NS"
-  value   = each.value
+  content = each.value
+
+  # tag records so it's clear they are managed by Terraform
+  tags = ["terraform"]
 
   depends_on = [azurerm_dns_zone.games_ruut]
 }
