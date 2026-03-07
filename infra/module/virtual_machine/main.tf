@@ -75,7 +75,8 @@ resource "azurerm_linux_virtual_machine" "game" {
   os_disk {
     caching              = "None"
     storage_account_type = "StandardSSD_LRS"
-    disk_size_gb         = 64
+    # https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers, as of March 2026, recommended > 65GB
+    disk_size_gb = 70
   }
 
   source_image_reference {
