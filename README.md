@@ -2,7 +2,7 @@
 
 Terraform scripts to run CS2 servers.
 
-> **Note:** As of March 2026 the servers run in [**Standard_D4as_v7**](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dasv7-series?tabs=sizebasic) virtual machines on Azure. Terraform is executed via GitHub DevOps pipelines; you don’t run `terraform` locally—the pipeline handles plan/apply and manages the Azure infrastructure. 
+> **Note:** As of March 2026 the servers run in [**Standard_D4as_v5**](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dasv5-series?tabs=sizebasic) virtual machines on Azure. Terraform is executed via GitHub DevOps pipelines; you don’t run `terraform` locally—the pipeline handles plan/apply and manages the Azure infrastructure. 
 >
 > * The VMs use **Ubuntu 24.04 LTS** (bumped from 22.04 march 2026).  When a newer LTS (26.04) becomes available in your region you can update `infra/module/virtual_machine/main.tf` accordingly.
 > * Server instances always run the **latest CS2 build** via the `juksuu/cs2:matchup` image; there’s no version pin in this repo, so the container itself governs which CS2 revision is deployed.
@@ -30,10 +30,10 @@ To edit how many servers are running, modify the `servers` map in [`main.tf`](./
 
 ```hcl
 servers = {
-    cs1 = { size = "Standard_D4as_v7" },
-    cs2 = { size = "Standard_D4as_v7" },
-    cs3 = { size = "Standard_D4as_v7" },
-    cs4 = { size = "Standard_D4as_v7" },
+    cs1 = { size = "Standard_D4as_v5" },
+    cs2 = { size = "Standard_D4as_v5" },
+    cs3 = { size = "Standard_D4as_v5" },
+    cs4 = { size = "Standard_D4as_v5" },
 }
 ```
 
