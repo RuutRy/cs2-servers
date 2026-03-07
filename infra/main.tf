@@ -46,19 +46,27 @@ resource "azurerm_dns_zone" "games_ruut" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
+# Workaround to get terraform Plan working, since the actual ns are created during apply and tf doesn't like that it doesn't know them at plan time.
+# using count directly and not for_each
 resource "cloudflare_dns_record" "name_servers" {
-  for_each = azurerm_dns_zone.games_ruut.name_servers
+  # Azure always provides exactly 4 nameservers
+  count = 4
 
   zone_id = var.cloudflare_zone_id
   name    = "games.ruut.me"
   type    = "NS"
-  content = each.value
-  ttl     = 300
+
+  # Convert the set to a list and grab the nameserver by index
+  content = tolist(azurerm_dns_zone.games_ruut.name_servers)[count.index]
+
+  ttl = 300
 
   # tag records so it's clear they are managed by Terraform
   tags = ["terraform"]
 
-  depends_on = [azurerm_dns_zone.games_ruut]
+  # Explicit depends_on is not needed. Referencing azurerm_dns_zone.games_ruut.name_servers 
+  # creates an implicit dependency, so Terraform automatically knows the creation order.
+  #depends_on = [azurerm_dns_zone.games_ruut]
 }
 
 # ------------------------------------------------------------------------------------------------------
