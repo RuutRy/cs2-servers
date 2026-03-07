@@ -26,7 +26,7 @@ terraform {
 }
 
 provider "azurerm" {
-  resource_provider_registrations = "core"
+  skip_provider_registration = true
   features {}
   use_oidc = true
 }
