@@ -61,9 +61,6 @@ resource "cloudflare_dns_record" "name_servers" {
 
   ttl = 300
 
-  # tag records so it's clear they are managed by Terraform
-  tags = ["terraform"]
-
   # Explicit depends_on is not needed. Referencing azurerm_dns_zone.games_ruut.name_servers 
   # creates an implicit dependency, so Terraform automatically knows the creation order.
   #depends_on = [azurerm_dns_zone.games_ruut]
