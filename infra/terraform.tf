@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.4"
+  required_version = "~> 1.14"
 
   backend "azurerm" {
     resource_group_name  = "terrafrom-resorce-group-www"
@@ -12,15 +12,15 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.75"
+      version = "~> 4.63"
     }
     azurecaf = {
       source  = "aztfmod/azurecaf"
-      version = "~>1.2.26"
+      version = "~>1.2.31"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 4.0"
+      version = "~> 5.18"
     }
   }
 }
