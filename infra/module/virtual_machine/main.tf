@@ -1,17 +1,17 @@
 terraform {
-  required_version = "~> 1.4"
+  required_version = "~> 1.14"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.75"
+      version = "~> 4.63"
     }
     azurecaf = {
       source  = "aztfmod/azurecaf"
-      version = "~>1.2.26"
+      version = "~>1.2.31"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 4.0"
+      version = "~> 5.17"
     }
   }
 }
@@ -67,16 +67,22 @@ resource "azurerm_linux_virtual_machine" "game" {
     public_key = file("${path.module}/../../config/id_rsa.pub")
   }
 
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("${path.module}/../../config/id_ed.pub")
+  }
+
   os_disk {
     caching              = "None"
     storage_account_type = "StandardSSD_LRS"
-    disk_size_gb         = 64
+    # https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers, as of March 2026, recommended > 65GB
+    disk_size_gb = 70
   }
 
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    sku       = "24_04-lts"
     version   = "latest"
   }
 }
