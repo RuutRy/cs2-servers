@@ -53,6 +53,7 @@ resource "cloudflare_dns_record" "name_servers" {
   name    = "games.ruut.me"
   type    = "NS"
   content = each.value
+  ttl     = 300
 
   # tag records so it's clear they are managed by Terraform
   tags = ["terraform"]
