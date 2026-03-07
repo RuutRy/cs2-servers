@@ -4,7 +4,7 @@ set -euo pipefail
 
 echo "[INFO] Installing docker via helper script"
 
-# download and execute the external installer (avoids template issues)
+# download and execute the external installer, should work
 wget -O /tmp/docker-install.sh \
   https://raw.githubusercontent.com/RuutRy/cs2-servers/main/infra/config/docker-install.sh
 chmod +x /tmp/docker-install.sh
