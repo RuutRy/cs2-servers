@@ -18,8 +18,10 @@ terraform {
 
 locals {
   data_inputs = {
-    name = var.server_name
-    rcon = var.rcon_pass
+    name              = var.server_name
+    rcon              = var.rcon_pass
+    demo_upload_url   = var.demo_upload_url
+    demo_upload_token = var.demo_upload_token
   }
 }
 
