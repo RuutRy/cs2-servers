@@ -72,6 +72,8 @@ jobs:
           TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
           TF_VAR_rcon_pass: ${{ secrets.RCON_PASS }}
+          TF_VAR_demo_upload_url: ${{ secrets.DEMO_UPLOAD_URL }}
+          TF_VAR_demo_upload_token: ${{ secrets.DEMO_UPLOAD_TOKEN }}
         run: |
           export exitcode=0
           terraform -chdir=infra plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
@@ -100,6 +102,8 @@ jobs:
           TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
           TF_VAR_rcon_pass: ${{ secrets.RCON_PASS }}
+          TF_VAR_demo_upload_url: ${{ secrets.DEMO_UPLOAD_URL }}
+          TF_VAR_demo_upload_token: ${{ secrets.DEMO_UPLOAD_TOKEN }}
         run: |
           TERRAFORM_PLAN=$(terraform -chdir=infra show -no-color tfplan)
 
@@ -187,4 +191,6 @@ jobs:
           TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API }}
           TF_VAR_rcon_pass: ${{ secrets.RCON_PASS }}
+          TF_VAR_demo_upload_url: ${{ secrets.DEMO_UPLOAD_URL }}
+          TF_VAR_demo_upload_token: ${{ secrets.DEMO_UPLOAD_TOKEN }}
         run: terraform -chdir=infra apply -auto-approve tfplan

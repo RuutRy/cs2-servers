@@ -18,8 +18,10 @@ terraform {
 
 locals {
   data_inputs = {
-    name = var.server_name
-    rcon = var.rcon_pass
+    name              = var.server_name
+    rcon              = var.rcon_pass
+    demo_upload_url   = var.demo_upload_url
+    demo_upload_token = var.demo_upload_token
   }
 }
 
@@ -70,6 +72,12 @@ resource "azurerm_linux_virtual_machine" "game" {
   admin_ssh_key {
     username   = "adminuser"
     public_key = file("${path.module}/../../config/id_ed.pub")
+  }
+
+  # discord bot
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("${path.module}/../../config/id_bot.pub")
   }
 
   os_disk {

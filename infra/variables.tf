@@ -43,3 +43,15 @@ variable "rcon_pass" {
   description = "RCON password for cs servers"
   sensitive   = true
 }
+
+variable "demo_upload_url" {
+  default     = ""
+  description = "URL for demo upload"
+  sensitive   = true
+}
+
+variable "demo_upload_token" {
+  default     = ""
+  description = "Token for demo upload"
+  sensitive   = true
+}

@@ -30,3 +30,11 @@ variable "sec_group_id" {
 variable "rcon_pass" {
 
 }
+
+variable "demo_upload_url" {
+
+}
+
+variable "demo_upload_token" {
+
+}

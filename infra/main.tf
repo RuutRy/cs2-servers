@@ -123,12 +123,14 @@ module "virtual_machines" {
   source   = "./module/virtual_machine"
   for_each = local.servers
 
-  rg_name      = azurerm_resource_group.rg.name
-  location     = azurerm_resource_group.rg.location
-  subnet_id    = azurerm_subnet.cs_subnet.id
-  zone_name    = azurerm_dns_zone.games_ruut.name
-  server_name  = each.key
-  server_size  = each.value.size
-  sec_group_id = azurerm_network_security_group.sg-cs-connection.id
-  rcon_pass    = var.rcon_pass
+  rg_name           = azurerm_resource_group.rg.name
+  location          = azurerm_resource_group.rg.location
+  subnet_id         = azurerm_subnet.cs_subnet.id
+  zone_name         = azurerm_dns_zone.games_ruut.name
+  server_name       = each.key
+  server_size       = each.value.size
+  sec_group_id      = azurerm_network_security_group.sg-cs-connection.id
+  rcon_pass         = var.rcon_pass
+  demo_upload_url   = var.demo_upload_url
+  demo_upload_token = var.demo_upload_token
 }
